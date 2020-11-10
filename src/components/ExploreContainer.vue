@@ -1,18 +1,53 @@
 <template>
   <div id="container">
     <strong>{{ name }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <p>
+      Explore
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://ionicframework.com/docs/components"
+        >UI Components</a
+      >
+    </p>
+    <button @click="count++" />
+    <input v-model="book.title" />
+    <div>{{ count }} {{ book.title }}</div>
   </div>
 </template>
 
 <script lang="ts">
-
-export default {
-  name: 'ExploreContainer',
-  props: {
-    name: String
-  }
+import { ref, reactive, watchEffect, defineComponent } from "vue";
+interface Book {
+  title: string;
+  author: string;
+  year: number;
 }
+export default defineComponent({
+  name: "ExploreContainer",
+  props: {
+    name: String,
+  },
+  data() {
+    return {
+      book: {
+        title: "Vue 3 Guide",
+        author: "Vue Team",
+        year: 2020,
+      } as Book,
+    };
+  },
+  setup(props) {
+    const count = ref(2);
+    watchEffect(() => {
+      console.log(`name is: ` + props.name);
+    });
+    // expose to template
+    return {
+      count,
+    };
+  },
+});
 </script>
 
 <style scoped>
