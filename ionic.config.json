@@ -1,0 +1,7 @@
+{
+  "name": "id-vault",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
